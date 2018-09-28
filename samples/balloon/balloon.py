@@ -25,8 +25,7 @@ import json
 import datetime
 import numpy as np
 import skimage.draw
-import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
 # Root directory of the project
 ROOT_DIR = os.path.abspath("../../")
 
@@ -56,7 +55,7 @@ class BalloonConfig(Config):
 
     # We use a GPU with 12GB memory, which can fit two images.
     # Adjust down if you use a smaller GPU.
-    IMAGES_PER_GPU = 1
+    IMAGES_PER_GPU = 2
 
     # Number of classes (including background)
     NUM_CLASSES = 1 + 1  # Background + balloon
@@ -188,7 +187,7 @@ def train(model):
     print("Training network heads")
     model.train(dataset_train, dataset_val,
                 learning_rate=config.LEARNING_RATE,
-                epochs=1,
+                epochs=30,
                 layers='heads')
 
 
